@@ -1,0 +1,46 @@
+# General
+*.class
+*.jar
+*.war
+*.ear
+target/
+bin/
+logs/
+*.log
+
+# IDE-specific
+.idea/
+.vscode/
+*.iml
+
+# Gradle-specific
+.gradle/
+/build/
+
+# Maven-specific
+.mvn/
+/target/
+
+# macOS-specific
+.DS_Store
+
+# Eclipse-specific
+.project
+.settings/
+*.launch
+
+# Intellij-specific
+*.ipr
+*.iws
+*.idea/
+*.iml
+
+# Temporary files
+*~
+
+# Application properties (if environment-specific configs are used)
+application-*.yml
+application.properties
+
+# Secrets (e.g., properties files containing sensitive data)
+application-secrets.yml
