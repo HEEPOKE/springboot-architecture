@@ -44,3 +44,5 @@ application.properties
 
 # Secrets (e.g., properties files containing sensitive data)
 application-secrets.yml
+
+.fake
