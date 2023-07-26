@@ -10,7 +10,6 @@ logs/
 
 # IDE-specific
 .idea/
-.vscode/
 *.iml
 
 # Gradle-specific
