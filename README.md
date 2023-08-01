@@ -21,5 +21,5 @@ docker compose up -d
 - run 
 
 ```bash 
-./gradlew bootRun
+./gradlew bootRun --args='--server.port=6476'
 ```
