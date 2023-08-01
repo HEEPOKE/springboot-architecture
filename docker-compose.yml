@@ -1,14 +1,14 @@
 version: "3.9"
 services:
   postgres:
-    container_name: sping-db
+    container_name: spring-db
     image: postgres:latest
     ports:
       - "5432:5432"
     environment:
       POSTGRES_USER: yoyo
       POSTGRES_PASSWORD: yoyo5555
-      POSTGRES_DB: sping-db
+      POSTGRES_DB: spring-db
     networks:
       - Heepoke
 
