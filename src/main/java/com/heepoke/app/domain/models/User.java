@@ -35,16 +35,6 @@ public class User {
     private Timestamp updatedAt;
 
     public User() {
-        setCreatedAt();
-    }
-
-    public void setCreatedAt() {
-        this.createdAt = new Timestamp(System.currentTimeMillis());
-        this.updatedAt = this.createdAt;
-    }
-
-    public void setUpdatedAt() {
-        this.updatedAt = new Timestamp(System.currentTimeMillis());
     }
 
     public User(String username, String email, String password, String tel, String role) {
@@ -52,6 +42,38 @@ public class User {
         this.email = email;
         this.password = password;
         this.tel = tel;
+        this.role = role;
+    }
+
+    public String getUsername() {
+        return username;
+    }  
+
+    public String getEmail() {
+        return email;
+    } 
+
+    public String getTel() {
+        return tel;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public void setRole(String role) {
         this.role = role;
     }
 
