@@ -36,6 +36,46 @@ public class UserService {
             user.setEmail(updatedUser.getEmail());
             user.setTel(updatedUser.getTel());
             user.setRole(updatedUser.getRole());
+            return userRepository.save(user);
+        }
+
+        return null;
+    }
+
+    @Transactional
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @Transactional
+    public void deleteUser(Long userId) {
+        userRepository.deleteById(userId);
+    }
+}
+
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @Transactional
+    public User saveUser(User user) {
+        user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+        user.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        return userRepository.save(user);
+    }
+
+    @Transactional
+    public User updateUser(Long userId, User updatedUser) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setUsername(updatedUser.getUsername());
+            user.setEmail(updatedUser.getEmail());
+            user.setTel(updatedUser.getTel());
+            user.setRole(updatedUser.getRole());
             user.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
             return userRepository.save(user);
         }
