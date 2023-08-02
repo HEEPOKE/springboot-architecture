@@ -2,9 +2,9 @@ package com.heepoke.app.shared.constants;
 
 import com.heepoke.app.domain.enums.MessageConstants;
 
-public class ResponseMessage {
+public class Message {
 
-    private ResponseMessage() {
+    private Message() {
     }
     
     public static final MessageConstants SUCCESS = MessageConstants.SUCCESS;

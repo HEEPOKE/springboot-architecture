@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.heepoke.app.application.service.UserService;
 import com.heepoke.app.domain.models.User;
+import com.heepoke.app.infrastructure.adapter.messaging.ResponseMessage;
+import com.heepoke.app.infrastructure.adapter.messaging.StatusResponse;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,27 +21,37 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public User createUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    public ResponseMessage<User> createUser(@RequestBody User user) {
+        User savedUser = userService.saveUser(user);
+        StatusResponse status = new StatusResponse("200", "Success", "user", "");
+        return new ResponseMessage<>(status, savedUser);
     }
 
     @PutMapping("/update/{userId}")
-    public User updateUser(@PathVariable Long userId, @RequestBody User updatedUser) {
-        return userService.updateUser(userId, updatedUser);
+    public ResponseMessage<User> updateUser(@PathVariable Long userId, @RequestBody User updatedUser) {
+        User userUpdated = userService.updateUser(userId, updatedUser);
+        StatusResponse status = new StatusResponse("200", "Success", "user", "");
+        return new ResponseMessage<>(status, userUpdated);
     }
 
     @GetMapping("/get")
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public ResponseMessage<List<User>> getAllUsers() {
+        List<User> users = userService.getAllUsers();
+        StatusResponse status = new StatusResponse("200", "Success", "user", "");
+        return new ResponseMessage<>(status, users);
     }
 
     @GetMapping("/find/{userId}")
-    public Optional<User> getUserById(Long userId) {
-        return userService.getUserById(userId);
+    public ResponseMessage<Optional<User>> getUserById(@PathVariable Long userId) {
+        Optional<User> user = userService.getUserById(userId);
+        StatusResponse status = new StatusResponse("200", "Success", "user", "");
+        return new ResponseMessage<>(status, user);
     }
 
     @DeleteMapping("/delete/{userId}")
-    public void deleteUser(@PathVariable Long userId) {
+    public ResponseMessage<String> deleteUser(@PathVariable Long userId) {
         userService.deleteUser(userId);
+        StatusResponse status = new StatusResponse("200", "Success", "user", "");
+        return new ResponseMessage<>(status, "User deleted successfully");
     }
 }
