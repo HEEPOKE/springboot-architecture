@@ -6,9 +6,10 @@ import com.heepoke.app.application.service.UserService;
 import com.heepoke.app.domain.models.User;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/apis/users")
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
@@ -17,22 +18,27 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public User createUser(@RequestBody User user) {
         return userService.saveUser(user);
     }
 
-    @PutMapping("/{userId}")
+    @PutMapping("/update/{userId}")
     public User updateUser(@PathVariable Long userId, @RequestBody User updatedUser) {
         return userService.updateUser(userId, updatedUser);
     }
 
-    @GetMapping
+    @GetMapping("/get")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    @DeleteMapping("/{userId}")
+    @GetMapping("/find/{userId}")
+    public Optional<User> getUserById(Long userId) {
+        return userService.getUserById(userId);
+    }
+
+    @DeleteMapping("/delete/{userId}")
     public void deleteUser(@PathVariable Long userId) {
         userService.deleteUser(userId);
     }

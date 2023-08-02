@@ -38,9 +38,15 @@ public class UserService {
 
         return null;
     }
+
     @Transactional
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Transactional
+    public Optional<User> getUserById(Long userId) {
+        return userRepository.findById(userId);
     }
 
     @Transactional
