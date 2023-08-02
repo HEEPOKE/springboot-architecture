@@ -1,5 +1,7 @@
 package com.heepoke.app.infrastructure.adapter.controllers;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.heepoke.app.application.service.UserService;
@@ -24,10 +26,11 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public ResponseMessage<User> createUser(@RequestBody User user) {
+    public ResponseEntity<ResponseMessage<User>> createUser(@RequestBody User user) {
         User savedUser = userService.saveUser(user);
         StatusResponse status = new StatusResponse( Message.SUCCESS.getCode(), Message.SUCCESS.getMessage(), Service.USER_CREATE, Description.USER_CREATE_SUCCESS);
-        return new ResponseMessage<>(status, savedUser);
+        ResponseMessage<User> responseBody = new ResponseMessage<>(status, savedUser);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseBody);
     }
 
     @PutMapping("/update/{userId}")
