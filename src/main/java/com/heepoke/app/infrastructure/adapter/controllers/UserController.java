@@ -34,30 +34,34 @@ public class UserController {
     }
 
     @PutMapping("/update/{userId}")
-    public ResponseMessage<User> updateUser(@PathVariable Long userId, @RequestBody User updatedUser) {
+    public ResponseEntity<ResponseMessage<User>> updateUser(@PathVariable Long userId, @RequestBody User updatedUser) {
         User userUpdated = userService.updateUser(userId, updatedUser);
         StatusResponse status = new StatusResponse(Message.SUCCESS.getCode(), Message.SUCCESS.getMessage(), Service.USER_UPDATE, Description.USER_UPDATE_SUCCESS);
-        return new ResponseMessage<>(status, userUpdated);
+        ResponseMessage<User> responseBody = new ResponseMessage<>(status, userUpdated);
+        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 
     @GetMapping("/get")
-    public ResponseMessage<List<User>> getAllUsers() {
+    public ResponseEntity<ResponseMessage<List<User>>> getAllUsers() {
         List<User> users = userService.getAllUsers();
         StatusResponse status = new StatusResponse(Message.SUCCESS.getCode(), Message.SUCCESS.getMessage(), Service.USER_LIST, Description.USER_LIST_SUCCESS);
-        return new ResponseMessage<>(status, users);
+        ResponseMessage<List<User>> responseBody = new ResponseMessage<>(status, users);
+        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 
     @GetMapping("/find/{userId}")
-    public ResponseMessage<Optional<User>> getUserById(@PathVariable Long userId) {
+    public ResponseEntity<ResponseMessage<Optional<User>>> getUserById(@PathVariable Long userId) {
         Optional<User> user = userService.getUserById(userId);
         StatusResponse status = new StatusResponse(Message.SUCCESS.getCode(), Message.SUCCESS.getMessage(), Service.USER_BY_ID, Description.USER_BY_ID_SUCCESS);
-        return new ResponseMessage<>(status, user);
+        ResponseMessage<Optional<User>> responseBody = new ResponseMessage<>(status, user);
+        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 
     @DeleteMapping("/delete/{userId}")
-    public ResponseMessage<String> deleteUser(@PathVariable Long userId) {
+    public ResponseEntity<ResponseMessage<String>> deleteUser(@PathVariable Long userId) {
         userService.deleteUser(userId);
         StatusResponse status = new StatusResponse(Message.SUCCESS.getCode(), Message.SUCCESS.getMessage(), Service.USER_DELETE, Description.USER_DELETE_SUCCESS);
-        return new ResponseMessage<>(status, "User deleted successfully");
+        ResponseMessage<String> responseBody = new ResponseMessage<>(status, "Delete success");
+        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 }
