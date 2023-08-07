@@ -17,6 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
+@Api(tags = "User")
 public class UserController {
 
     private final UserService userService;
@@ -25,6 +26,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    @ApiOperation(value = "Create a new user")
     @PostMapping("/create")
     public ResponseEntity<ResponseMessage<User>> createUser(@RequestBody User user) {
         try {
@@ -39,6 +41,7 @@ public class UserController {
         }
     }
 
+    @ApiOperation(value = "Update user")
     @PutMapping("/update/{userId}")
     public ResponseEntity<ResponseMessage<User>> updateUser(@PathVariable Long userId, @RequestBody User updatedUser) {
         try {
@@ -53,6 +56,7 @@ public class UserController {
         }
     }
 
+    @ApiOperation(value = "Get all users")
     @GetMapping("/get")
     public ResponseEntity<ResponseMessage<List<User>>> getAllUsers() {
         try {
@@ -67,6 +71,7 @@ public class UserController {
         }
     }
 
+    @ApiOperation(value = "Find user By ID")
     @GetMapping("/find/{userId}")
     public ResponseEntity<ResponseMessage<Optional<User>>> getUserById(@PathVariable Long userId) {
         try {
@@ -81,6 +86,7 @@ public class UserController {
         }
     }
 
+    @ApiOperation(value = "Delete user")
     @DeleteMapping("/delete/{userId}")
     public ResponseEntity<ResponseMessage<Boolean>> deleteUser(@PathVariable Long userId) {
         try {
